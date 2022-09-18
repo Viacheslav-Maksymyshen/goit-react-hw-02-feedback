@@ -1,0 +1,9 @@
+.section {
+  max-width: 900px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 50px;
+}

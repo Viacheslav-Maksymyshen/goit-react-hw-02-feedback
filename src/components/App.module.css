@@ -1,0 +1,12 @@
+.container {
+  padding: 40px;
+}
+
+.feedbacks {
+  background-color: rgb(32, 39, 39);
+  padding: 30px;
+
+  font-size: 22px;
+  color: rgb(176, 170, 170);
+  box-shadow: 2px 4px 4px 6px rgb(98, 75, 75);
+}
