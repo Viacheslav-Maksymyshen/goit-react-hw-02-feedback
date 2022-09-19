@@ -1,39 +1,37 @@
 import PropTypes from 'prop-types';
 import styles from './Statistics.module.css';
+import Notification from '../Notification';
 
-function Statistics(props) {
-  const { good, neutral, bad, total, positivePercentage } = props;
-
-  return (
-    <>
+const Statistics = ({
+  good,
+  neutral,
+  bad,
+  total,
+  positiveFeedbackPercentage,
+}) => (
+  <>
+    {total ? (
       <ul className={styles.feedBackList}>
-        <li className={styles.feedBackItem} key="id-1">
-          Good: {good}
-        </li>
-        <li className={styles.feedBackItem} key="id-2">
-          Neutral: {neutral}
-        </li>
-        <li className={styles.feedBackItem} key="id-3">
-          Bad: {bad}
-        </li>
-        <li className={styles.feedBackItem} key="id-4">
-          Total: {total(good, neutral, bad)}
-        </li>
-        <li className={styles.feedBackItem} key="id-5">
-          Positive feedback: {good ? positivePercentage(good, neutral, bad) : 0}
-          %
+        <li className={styles.feedBackItem}>Good: {good}</li>
+        <li className={styles.feedBackItem}>Neutral: {neutral}</li>
+        <li className={styles.feedBackItem}>Bad: {bad}</li>
+        <li className={styles.feedBackItem}>Total: {total}</li>
+        <li className={styles.feedBackItem}>
+          Positive feedback: {positiveFeedbackPercentage}%
         </li>
       </ul>
-    </>
-  );
-}
+    ) : (
+      <Notification message="There is no feedback" />
+    )}
+  </>
+);
 
 Statistics.propTypes = {
   good: PropTypes.number.isRequired,
   neutral: PropTypes.number.isRequired,
   bad: PropTypes.number.isRequired,
-  total: PropTypes.func.isRequired,
-  positivePercentage: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
+  positiveFeedbackPercentage: PropTypes.number.isRequired,
 };
 
 export default Statistics;

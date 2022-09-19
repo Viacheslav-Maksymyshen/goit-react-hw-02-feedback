@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Statistics from './Statistics';
 import FeedBackOptions from './FeedBackOptions';
 import Section from './Section';
-import Notification from './Notification';
+
 import css from './App.module.css';
 
 class App extends Component {
@@ -17,22 +17,20 @@ class App extends Component {
       [e.target.name]: prevState[e.target.name] + 1,
     }));
   };
-  countTotalFeedback(good, neutral, bad) {
-    const total = good + neutral + bad;
-    return total;
-  }
-  countPositiveFeedbackPercentage(good, neutral, bad) {
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+  countPositiveFeedbackPercentage = () => {
     const positivePercentage =
-      (good / this.countTotalFeedback(good, neutral, bad)) * 100;
+      (this.state.good / this.countTotalFeedback()) * 100;
 
     return Math.round(positivePercentage);
-  }
+  };
 
   render() {
     const { good, neutral, bad } = this.state;
-    const options = this.state;
-    const total = this.countTotalFeedback;
-    const positivePercentage = this.countPositiveFeedbackPercentage.bind(this);
+    const options = Object.keys(this.state);
 
     return (
       <div className={css.container}>
@@ -43,19 +41,16 @@ class App extends Component {
               onLeaveFeedback={this.onLeaveFeedback}
             />
           </Section>
-          {total(good, neutral, bad) ? (
-            <Section title="Statistics">
-              <Statistics
-                good={good}
-                neutral={neutral}
-                bad={bad}
-                total={total}
-                positivePercentage={positivePercentage}
-              />
-            </Section>
-          ) : (
-            <Notification message="There is no feedback" />
-          )}
+
+          <Section title="Statistics">
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              positiveFeedbackPercentage={this.countPositiveFeedbackPercentage()}
+            />
+          </Section>
         </div>
       </div>
     );
