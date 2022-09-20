@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import styles from './Statistics.module.css';
-import Notification from '../Notification';
 
 const Statistics = ({
   good,
@@ -10,19 +9,15 @@ const Statistics = ({
   positiveFeedbackPercentage,
 }) => (
   <>
-    {total ? (
-      <ul className={styles.feedBackList}>
-        <li className={styles.feedBackItem}>Good: {good}</li>
-        <li className={styles.feedBackItem}>Neutral: {neutral}</li>
-        <li className={styles.feedBackItem}>Bad: {bad}</li>
-        <li className={styles.feedBackItem}>Total: {total}</li>
-        <li className={styles.feedBackItem}>
-          Positive feedback: {positiveFeedbackPercentage}%
-        </li>
-      </ul>
-    ) : (
-      <Notification message="There is no feedback" />
-    )}
+    <ul className={styles.feedBackList}>
+      <li className={styles.feedBackItem}>Good: {good}</li>
+      <li className={styles.feedBackItem}>Neutral: {neutral}</li>
+      <li className={styles.feedBackItem}>Bad: {bad}</li>
+      <li className={styles.feedBackItem}>Total: {total}</li>
+      <li className={styles.feedBackItem}>
+        Positive feedback: {positiveFeedbackPercentage}%
+      </li>
+    </ul>
   </>
 );
 
